@@ -19,6 +19,8 @@ public class MathExample {
 		System.out.println("두 수의 몫 : " + num1/num2);
 		System.out.println("두 수의 나머지 : " + num1%num2);
 		
+		var num3 = 10; //값에 따라 자동으로 변수를 선언해줌, 그러나 어떤 오류를 일으킬지 모르니 사용은 지양
+		
 		scn.close();
 	}
 }
