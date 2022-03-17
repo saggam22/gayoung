@@ -56,19 +56,32 @@ public class BankApp {
 	public static void createAccount() {
 		System.out.print("계좌번호 입력>> ");
 		String accNo = scn.next();
-		System.out.print("예금주 입력>> ");
-		String accName = scn.next();
-		System.out.print("예금액 입력>> ");
-		int accMoney = scn.nextInt();
-		Account accnt = new Account(accNo, accName, accMoney);
-
-		for (int i = 0; i < banks.length; i++) {
-			if (banks[i] == null) {
-				banks[i] = accnt;
+		int checkCnt = 0; //계좌가 있는 건지 확인하는 변수
+	
+		for(int i=0; i<banks.length; i++) {
+			if(banks[i] != null && banks[i].getAccNo().equals(accNo)) { //입력값이랑 저장값이 같을때
+				checkCnt = 1;
 				break;
 			}
 		}
-		System.out.println("계좌가 정상적으로 생성되었습니다.");
+		if(checkCnt == 1) {
+			System.out.println("동일한 계좌번호가 있습니다.");
+			
+		} else if(checkCnt == 0) {
+			System.out.println("예금주 입력>> ");
+			String accName = scn.next();
+			System.out.print("예금액 입력>> ");
+			int accMoney = scn.nextInt();
+			Account accnt = new Account(accNo, accName, accMoney);
+
+			for (int i = 0; i < banks.length; i++) {
+				if (banks[i] == null) {
+					banks[i] = accnt;
+					break;
+				}
+			}
+			System.out.println("계좌가 정상적으로 생성되었습니다.");
+		}
 	}
 
 	// 예금처리메소드
@@ -102,12 +115,54 @@ public class BankApp {
 
 	// 출금처리 메소드
 	public static void withdraw() {
-
+		System.out.print("계좌번호>> ");
+		String ano = scn.next();
+		System.out.print("출금액입력>> ");
+		int amt = scn.nextInt();
+		int checkCnt = 0; //계좌번호가 있는 건지 확인하는 변수
+		for(int i=0; i<banks.length; i++) {
+			if(banks[i] != null && banks[i].getAccNo().equals(ano)) { //계좌번호 확인
+				//계좌번호 조회되었을때
+				checkCnt = 1;
+				int currAmt = banks[i].getMoney();
+				if(currAmt - amt < 0 ) {
+					checkCnt = 2;
+					break;
+				}
+				banks[i].setMoney(currAmt - amt); //기존에 입금한 금액과 새로 입금하는 금액을 빼야하므로
+				break;
+			}
+		}
+		if(checkCnt == 1) {
+			System.out.println("정상적으로 처리되었습니다.");
+		} else if(checkCnt == 2) {
+			System.out.println("잔액이 부족합니다..");
+		} else {
+			System.out.println("계좌번호가 없습니다.");
+		}
 	}
 
 	// 잔액조회 메소드
 	public static void findAccountMoney() {
-
+		System.out.print("계좌번호>> ");
+		String ano = scn.next();
+		int checkCnt = 0; //계좌번호가 있는 건지 확인하는 변수
+		for(int i=0; i<banks.length; i++) {
+			if(banks[i] != null && banks[i].getAccNo().equals(ano)) { //계좌번호 확인
+				//계좌번호 조회되었을때
+				checkCnt = 1;
+				int currAmt = banks[i].getMoney();
+				System.out.println("잔액은 " + currAmt + "원 입니다.");
+					break;
+			} else {
+				checkCnt = 2;
+			}
+		}
+		if(checkCnt == 1) {
+			System.out.println("조회완료");
+		} else if(checkCnt == 2) {
+			System.out.println("계좌번호가 없습니다.");
+		}
 	}
 	//전체 리스트 출력
 	public static void showList() {
