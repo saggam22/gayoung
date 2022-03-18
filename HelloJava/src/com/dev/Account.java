@@ -6,6 +6,15 @@ public class Account {
 	private String accName;
 	private int money;
 	
+	public static String bankName;
+	static {
+		bankName = "한일은행";
+	}
+	
+	public static void showBankName() {
+		System.out.println("한일은행입니다.");
+	}
+	
 	//constructor
 	public Account(String accNo, String accName, int money) {
 		super();
