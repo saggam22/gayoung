@@ -4,7 +4,19 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class LibraryExe {
-	public static void main(String[] args) {
+	
+	private static LibraryExe singleton = new LibraryExe();
+	
+	private LibraryExe() { //생성자를 접근제어자로 설정하면 다른 클래스에서 인스턴스 생성 불가
+		
+	}
+	
+	public static LibraryExe getInstance() { //인스턴스를 생성하는 메소드를 실행하여야만 인스턴스 생성/static 메소드는 인스턴스를 생성하지 않아도 사용가능
+		return singleton;
+	}
+	
+//	public static void main(String[] args) {
+	public void run() {
 		// 책제목, 저자, 가격 -> 저장
 		// 리스트를 뿌려줌
 
@@ -66,7 +78,7 @@ public class LibraryExe {
 		showMessage("===end of prog===");
 	}
 
-	public static void showMessage(String str) {
+	public void showMessage(String str) {
 		for (int i = 0; i < str.length(); i++) {
 			System.out.print(str.charAt(i));
 			try {
