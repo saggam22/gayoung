@@ -1,5 +1,17 @@
 package com.edu.api;
 
-public class WrapperExample {
+import java.util.ArrayList;
 
+public class WrapperExample {
+	public static void main(String[] args) {
+		// 기본타입(int, long, double, boolean....)
+		// 참조타입(Integer, Long, Double, Boolean...)
+		// int --> Integer (boxing), Integer -> int(unboxing)
+		ArrayList<Integer> ary = new ArrayList<Integer>();
+		ary.add(100);
+		ary.add(new Integer(200)); //Deprecated. 향후 자바에서 제거할 거니 이렇게 사용하지마라 표시해줌
+		
+		new Integer(100).floatValue(); //100.0으로 표현
+
+	}
 }
