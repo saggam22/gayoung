@@ -14,7 +14,8 @@ public class ApiExample {
 		r1 = Math.floor(3.9);
 		System.out.println("3.9의 버림 : " + r1);
 		
-		Math.abs(-30);
+		r1 = Math.abs(-30);
+		System.out.println(r1);
 		
 		System.out.println("end of prog");
 	}

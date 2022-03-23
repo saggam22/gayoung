@@ -69,13 +69,24 @@ public class StudentApp {
 				impl.insertStudent(s1);
 				
 			} else if (menu == 2) {
-				impl.studentList();
+				System.out.println(impl.studentList());
 			} else if (menu == 3) {
 				System.out.println("조회할 학생번호>> ");
 				int num = scn.nextInt();
-				impl.getStudent(num);
+				System.out.println(impl.getStudent(num));
 			} else if (menu == 4) {
+				System.out.print("학생번호를 입력하세요> ");
+				int num = scn.nextInt();
+				System.out.print("학생이름을 입력하세요> ");
+				String name = scn.next();
+				System.out.print("수정할 영어점수를 입력하세요> ");
+				int eng = scn.nextInt();
+				System.out.print("수정할 국어점수을 입력하세요> ");
+				int kor = scn.nextInt();
 				
+				Student s1 = new Student(num, name, eng, kor);
+				
+				impl.modifyStudent(s1);
 			} else if (menu == 9) {
 				System.out.println("프로그램을 종료합니다.");
 				break;
