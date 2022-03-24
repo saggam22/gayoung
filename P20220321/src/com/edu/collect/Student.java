@@ -57,7 +57,7 @@ public class Student {
 	//toString() => 재정의
 	@Override
 	public String toString() {
-		return "학생정보 [학생번호 =" + number + ", 이름=" + name + ", 영어점수=" + engScore + ", 국어점수" + korScore
+		return "학생정보 [학생번호 = " + number + ", 이름 = " + name + ", 영어점수 = " + engScore + ", 국어점수 = " + korScore
 				+ "]";
 	}
 }
