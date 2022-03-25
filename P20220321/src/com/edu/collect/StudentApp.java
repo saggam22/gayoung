@@ -17,7 +17,7 @@ public class StudentApp {
 	}
 
 	// 멤버클래스
-	class StudentServiceFile implements StudentService {
+	class StudentServiceImpl implements StudentService {
 
 		@Override
 		public void insertStudent(Student student) {
