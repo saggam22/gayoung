@@ -17,7 +17,7 @@ public class StudentApp {
 	}
 
 	// 멤버클래스
-	class StudentServiceImpl implements StudentService {
+	class StudentServiceFile implements StudentService {
 
 		@Override
 		public void insertStudent(Student student) {
@@ -69,12 +69,17 @@ public class StudentApp {
 			return searchList;
 		}
 
+		@Override
+		public void saveToFile() {
+			System.exit(0);	
+		}
+
 	} // end of StudentServiceImpl()
 
 	public void execute() {
 		// 메뉴 1.추가 2.리스트 3.한건조회 4.수정 9.종료
 
-		StudentService service = new StudentServiceImpl(); // 인터페이스에 담아 주면 추후 구현객체만 바꿔주면 된다
+		StudentService service = new StudentServiceFile(); // 인터페이스에 담아 주면 추후 구현객체만 바꿔주면 된다
 		// 클래스로 선언하면 list를 클래스마다 구현해야하지만 인터페이스에 담아두면 구현객체를 바꿨을때 나머지 기능 다 사용가능
 
 		while (true) {
@@ -150,6 +155,7 @@ public class StudentApp {
 
 			} else if (menu == 9) {
 				System.out.println("프로그램을 종료합니다.");
+				service.saveToFile();
 				break;
 			}
 		} // end of while()

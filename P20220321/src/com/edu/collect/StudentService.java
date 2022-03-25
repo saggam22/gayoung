@@ -10,4 +10,5 @@ public interface StudentService {  //추상메소드 정의(선언)을 해놨으
 	public void modifyStudent(Student sudent); //한건 수정
 	public void removeStudent(int sno); //한건 삭제
 	public List<Student> searchStudent(String name); //이름조회
+	public void saveToFile();
 }
