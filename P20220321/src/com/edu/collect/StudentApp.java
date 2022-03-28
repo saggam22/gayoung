@@ -17,7 +17,7 @@ public class StudentApp {
 	}
 
 	// 멤버클래스
-	class StudentServiceFile implements StudentService {
+	class StudentServiceImpl implements StudentService {
 
 		@Override
 		public void insertStudent(Student student) {
@@ -76,6 +76,8 @@ public class StudentApp {
 
 	} // end of StudentServiceImpl()
 
+	
+	//메인기능을 담당하는 execute()
 	public void execute() {
 		// 메뉴 1.추가 2.리스트 3.한건조회 4.수정 9.종료
 

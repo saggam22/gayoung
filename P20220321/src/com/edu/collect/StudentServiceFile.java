@@ -1,13 +1,39 @@
 package com.edu.collect;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
+//StudentServiceImpl (중첩클래스의 기능 대체)
+//입력, 수정, 삭제 => 파일에 저장이 되도록
 public class StudentServiceFile implements StudentService {
 
+	//필드
 	List<Student> list = new ArrayList<Student>();
 	File file;
-
+	
+	//생성자
+	//기본 생성자에 파일에 저장되어서 있는 내용을 읽어서 list값을 담아준다
+	public StudentServiceFile() {
+		try {
+			FileReader fr = new FileReader("studentList.data");
+			BufferedReader br = new BufferedReader(fr);
+			String readBuffer = null;
+			while((readBuffer = br.readLine()) != null) {
+				String[] contents = readBuffer.split(",");
+				list.add(new Student(Integer.parseInt(contents[0]), contents[1], Integer.parseInt(contents[2]), Integer.parseInt(contents[3])));
+			}
+			br.close();
+			fr.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	@Override
 	public void insertStudent(Student student) {
@@ -63,8 +89,8 @@ public class StudentServiceFile implements StudentService {
 	public void saveToFile() {
 		// 작성했던 ArrayList<Student> list => 파일저장
 		try {
-			FileWriter fw = new FileWriter("StudentList.data");
-			BufferedWriter bw = new BufferedWriter(fw);
+			FileWriter fw = new FileWriter("studentList.data");  //문자기반으로 2바이트씩 처리하는 클래스
+			BufferedWriter bw = new BufferedWriter(fw);  //보조스트림의 생성자의 매개값으로 기본스트림을 넣어줌
 
 			for (Student stud : list) {
 				bw.write(stud.getNumber() + "," + stud.getName() + "," + stud.getEngScore() + "," + stud.getKorScore()+"\n");

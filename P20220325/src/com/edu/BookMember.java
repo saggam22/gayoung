@@ -38,6 +38,7 @@ public class BookMember extends Member {
 
 	@Override
 	public String toString() {
+		//String info = super.toSting 으로 기술하고 info += 로 추가정보를 더하여 사용가능!
 		return "Member [memberId=" + super.getMemberId() + ", memberName=" + super.getMemberName() + ", phone=" + super.getPhone() +  ", 반장이름=" +  this.getbMemberName() + ", 강의실정보=" + this.getbRoom() +"]";
 	}
 	

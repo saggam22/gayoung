@@ -55,7 +55,7 @@ public class MemberApp {
 				}
 			}
 			if (menu == 1) {
-				System.out.println("등록>> 1.도서반 2.축구반 3.강습반(수영)");
+				System.out.println("등록>> 1.도서반 2.축구반 3.강습반(수영)");  //1,2 숫자 말고 축구반을 입력할때는 equals를 써서 if문을 나누어도된다
 				System.out.print("선택>> ");
 
 				int menu2 = scn.nextInt();
@@ -75,6 +75,9 @@ public class MemberApp {
 
 					Member book = new BookMember(num, name, phone, bname, broom);
 					service.addMember(book);
+					
+					//따로 변수를 선언하지 않고, 메소드를 호출하지 않고 바로 리스트 추가도 가능 => members.add(new BookMember(num, name, phone, bname, broom));
+					//변수를 선언하지 않고 리스트 추가 가능 => service.addMember(new BookMember(num, name, phone, bname, broom));
 
 				} else if (menu2 == 2) { // 축구반
 					System.out.print("코치이름을 입력하세요> ");
@@ -115,6 +118,8 @@ public class MemberApp {
 			} else if (menu == 9) {
 				System.out.println("프로그램을 종료합니다.");
 				break;
+			} else {
+				System.out.println("잘못된 메뉴를 선택했습니다.");
 			}
 		}
 		System.out.println("end of prog");
