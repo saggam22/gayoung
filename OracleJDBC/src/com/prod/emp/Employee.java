@@ -9,7 +9,40 @@ public class Employee {
 	private int salary;
 	private String hireDate;
 	private String jobId;
+	private String phoneNumber;
 	
+	public Employee() {
+		super();
+	}
+
+	public Employee(int salary, String jobId) {
+		super();
+		this.salary = salary;
+		this.jobId = jobId;
+	}
+	
+	public Employee(int employeeId, String firstName, int salary, String phoneNumber) {
+		super();
+		this.employeeId = employeeId;
+		this.firstName = firstName;
+		this.salary = salary;
+		this.phoneNumber = phoneNumber;
+	}
+
+
+
+	public Employee(int employeeId, String firstName, String lastName, String email, int salary, String hireDate,
+			String jobId, String phoneNumber) {
+		super();
+		this.employeeId = employeeId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.salary = salary;
+		this.hireDate = hireDate;
+		this.jobId = jobId;
+		this.phoneNumber = phoneNumber;
+	}
 	
 	public int getEmployeeId() {
 		return employeeId;
@@ -52,6 +85,12 @@ public class Employee {
 	}
 	public void setJobId(String jobId) {
 		this.jobId = jobId;
+	}
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 	
 	@Override

@@ -81,8 +81,9 @@ public class StudentApp {
 	public void execute() {
 		// 메뉴 1.추가 2.리스트 3.한건조회 4.수정 9.종료
 
-		StudentService service = new StudentServiceFile(); // 인터페이스에 담아 주면 추후 구현객체만 바꿔주면 된다
+		StudentService service = null;//new StudentServiceFile(); // 인터페이스에 담아 주면 추후 구현객체만 바꿔주면 된다
 		// 클래스로 선언하면 list를 클래스마다 구현해야하지만 인터페이스에 담아두면 구현객체를 바꿨을때 나머지 기능 다 사용가능
+		service = new StudentServiceOracle();
 
 		while (true) {
 			System.out.println("메뉴>> 1.추가 2.리스트 3.한건조회 4.수정 5.삭제 6.이름 조회 9.종료");
