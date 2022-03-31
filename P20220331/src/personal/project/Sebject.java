@@ -1,6 +1,6 @@
 package personal.project;
 
-public class Subject {
+public class Sebject {
 	
 	private int subjectId;
 	private String subjectName;

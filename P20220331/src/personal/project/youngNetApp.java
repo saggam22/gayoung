@@ -4,10 +4,10 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class youngNetApp {
-	// 메소드 구현
 
 	Scanner scn = new Scanner(System.in);
-	MemberExe memExe = new MemberExe();
+	MemberService mService = new MemberServieQracle();
+	AdminExe admin = new AdminExe();
 
 	public void execute() {
 		// 로그인
@@ -22,11 +22,13 @@ public class youngNetApp {
 					System.out.println("비밀번호를 입력하세요");
 					int password = scn.nextInt();
 					if (memId == 100) {
-						String messege = memExe.logExecute(memId, password);
+						String messege = mService.logExecute(memId, password);
 						System.out.println(messege);
 						System.out.println("관리자모드를 실행합니다.");
+						admin.adminExecute();
+						
 					} else {
-						memExe.logExecute(memId, password);
+						mService.logExecute(memId, password);
 						System.out.println(memId + "님 환영합니다.");
 					}
 					
@@ -43,7 +45,7 @@ public class youngNetApp {
 					String memPhone = scn.next();
 					
 					Member mem = new Member(memId, password, memName, memPhone);
-					memExe.insetMember(mem);
+					mService.insetMember(mem);
 					
 					break;
 					
@@ -56,6 +58,7 @@ public class youngNetApp {
 				scn.next();
 			}
 		}
+		scn.close();
 	} // end of execute
 	
 }
