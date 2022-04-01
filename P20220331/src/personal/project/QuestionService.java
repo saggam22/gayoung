@@ -9,5 +9,7 @@ public interface QuestionService {
 	public Question searchQ(int qId); //문제검색
 	public void updateQ(Question q); //문제수정
 	public void deleteQ(int qId); //문제삭제
+	public List<Question> aList(); //문제풀기
+	public List<Question> qAnswer(); //문제채점
 
 }

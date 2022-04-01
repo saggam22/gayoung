@@ -47,5 +47,13 @@ public class Question {
 				+ "]";
 	}
 	
+	public String toQeustion() {
+		return "[문제번호=" + questionId + ", 문제내용=" + questionContents + "]";
+	}
+	
+	public int toAnswer() {
+		int a = answer;
+		return a;
+	}
 	
 }

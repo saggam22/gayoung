@@ -8,6 +8,7 @@ public class youngNetApp {
 	Scanner scn = new Scanner(System.in);
 	MemberService mService = new MemberServieQracle();
 	AdminExe admin = new AdminExe();
+	UserExe user = new UserExe();
 
 	public void execute() {
 		// 로그인
@@ -30,6 +31,7 @@ public class youngNetApp {
 					} else {
 						mService.logExecute(memId, password);
 						System.out.println(memId + "님 환영합니다.");
+						user.userExecute();
 					}
 					
 					break;

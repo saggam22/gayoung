@@ -10,6 +10,7 @@ public class AdminExe {
 	public void adminExecute() {
 
 		int input, input2;
+
 		while (true) {
 			try {
 				System.out.println("1.문제관리 2.회원관리");
@@ -23,6 +24,7 @@ public class AdminExe {
 						for (Question q : qlist) {
 							System.out.println(q.toString());
 						}
+
 					} else if (input2 == 2) {
 						System.out.println("문제번호를 입력하세요");
 						int qId = scn.nextInt();
@@ -50,8 +52,6 @@ public class AdminExe {
 						int qId = scn.nextInt();
 						qService.deleteQ(qId);
 					}
-					break;
-
 				} else if (input == 2) {
 					System.out.println("1.회원리스트 2.회원등록 3.회원정보수정 4.회원삭제");
 					input2 = scn.nextInt();
@@ -61,6 +61,7 @@ public class AdminExe {
 						for (Member m : memlist) {
 							System.out.println(m.toString());
 						}
+					
 					} else if (input2 == 2) {
 						System.out.println("회원번호를 입력하세요");
 						int memId = scn.nextInt();
@@ -73,7 +74,7 @@ public class AdminExe {
 
 						Member mem = new Member(memId, password, memName, memPhone);
 						mService.insetMember(mem);
-
+						
 					} else if (input2 == 3) {
 						System.out.println("수정할 회원번호를 입력하세요");
 						int memId = scn.nextInt();
@@ -86,22 +87,18 @@ public class AdminExe {
 
 						Member mem = new Member(memId, password, memName, memPhone);
 						mService.updateMember(mem);
-
+					
 					} else if (input2 == 4) {
 						System.out.println("삭제할 회원번호를 입력하세요");
 						int memId = scn.nextInt();
-						mService.deleteMember(memId);
+						mService.deleteMember(memId);	
 					}
-					break;
 				} else {
-					System.out.println("1 또는 2 중에서 선택해주세요..");
+					System.out.println("메뉴 중에서 선택해주세요..");
 				}
-
 			} catch (InputMismatchException e) {
 				System.out.println("번호를 입력해주세요..");
-				scn.next();
 			}
 		}
-		scn.close();
 	} // end of AdminExecute
 }

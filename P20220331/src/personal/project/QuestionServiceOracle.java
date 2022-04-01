@@ -11,8 +11,8 @@ public class QuestionServiceOracle extends DAO implements QuestionService {
 		try {
 			psmt = conn.prepareStatement("INSERT INTO question (question_id, question_contents, answer) VALUES (?, ?, ?)");
 			psmt.setInt(1, q.getQuestionId());
-			psmt.setString(1, q.getQuestionContents());
-			psmt.setInt(2, q.getAnswer());
+			psmt.setString(2, q.getQuestionContents());
+			psmt.setInt(3, q.getAnswer());
 			
 			psmt.executeUpdate();
 			
@@ -102,5 +102,46 @@ public class QuestionServiceOracle extends DAO implements QuestionService {
 			disConn();
 		}
 	}//end of deleteQ
+
+	@Override
+	public List<Question> aList() {
+		conn = getConn();
+		List<Question> qlist = new ArrayList<Question>();
+		Question q = new Question();
+		try {
+			psmt = conn.prepareStatement("SELECT question_contents FROM question ORDER BY question_id");
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				q.setQuestionContents(rs.getString("question_contents"));
+				qlist.add(q);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disConn();
+		}
+		return qlist;
+	}
+	
+	@Override
+	public List<Question> qAnswer() {
+		conn = getConn();
+		List<Question> alist = new ArrayList<Question>();
+		Question q = new Question();
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery("SELECT question_id, answer FROM question ORDER BY question_id");
+			while(rs.next()) {
+				q.setQuestionId(rs.getInt("question_id"));
+				q.setAnswer(rs.getInt("answer"));
+				alist.add(q);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disConn();
+		}
+		return alist;
+	}
 
 }//end of class

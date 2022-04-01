@@ -8,7 +8,7 @@ public class MemberServieQracle extends DAO implements MemberService {
 	// 로그인 메소드
 	public String logExecute(int memID, int password) {
 		conn = getConn();
-		String sql = "SELECT password FROM subject" + " WHERE member_id = ?";
+		String sql = "SELECT password FROM member WHERE member_id = ?";
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, memID);
