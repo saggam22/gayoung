@@ -61,7 +61,7 @@ public class AdminExe {
 						for (Member m : memlist) {
 							System.out.println(m.toString());
 						}
-					
+
 					} else if (input2 == 2) {
 						System.out.println("회원번호를 입력하세요");
 						int memId = scn.nextInt();
@@ -74,7 +74,7 @@ public class AdminExe {
 
 						Member mem = new Member(memId, password, memName, memPhone);
 						mService.insetMember(mem);
-						
+
 					} else if (input2 == 3) {
 						System.out.println("수정할 회원번호를 입력하세요");
 						int memId = scn.nextInt();
@@ -87,17 +87,18 @@ public class AdminExe {
 
 						Member mem = new Member(memId, password, memName, memPhone);
 						mService.updateMember(mem);
-					
+
 					} else if (input2 == 4) {
 						System.out.println("삭제할 회원번호를 입력하세요");
 						int memId = scn.nextInt();
-						mService.deleteMember(memId);	
+						mService.deleteMember(memId);
 					}
 				} else {
 					System.out.println("메뉴 중에서 선택해주세요..");
 				}
 			} catch (InputMismatchException e) {
 				System.out.println("번호를 입력해주세요..");
+				scn.next();
 			}
 		}
 	} // end of AdminExecute
