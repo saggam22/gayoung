@@ -6,27 +6,28 @@ import java.util.*;
 public class MemberServieQracle extends DAO implements MemberService {
 
 	// 로그인 메소드
-	public String logExecute(int memID, int password) {
+	public Member logExecute(int memID, int password) {
 		conn = getConn();
-		String sql = "SELECT password FROM member WHERE member_id = ?";
+		Member mem = null;
+		String sql = "SELECT * FROM member WHERE member_id = ? AND password = ?";
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, memID);
+			psmt.setInt(2, password);
 			rs = psmt.executeQuery();
 			if (rs.next()) {
-				if (rs.getInt("password") == password) {
-					return "로그인 성공";
-				} else {
-					return "비밀번호를 확인하세요";
-				}
+				mem = new Member();
+				mem.setMemberId(rs.getInt("member_id"));
+				mem.setPassword(rs.getInt("password"));
+				mem.setMemberName(rs.getString("member_name"));
+				mem.setMemberPhone(rs.getString("member_phone"));
 			}
-			return "아이디를 확인하세요";
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			disConn();
 		}
-		return "데이터 오류입니다.";
+		return mem;
 	}
 
 	// 회원등록 메소드

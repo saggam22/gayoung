@@ -21,16 +21,19 @@ public class youngNetApp {
 					int memId = scn.nextInt();
 					System.out.println("비밀번호를 입력하세요");
 					int password = scn.nextInt();
-					if (memId == 100) {
-						String messege = mService.logExecute(memId, password);
-						System.out.println(messege);
-						System.out.println("관리자모드를 실행합니다.");
+					
+					Member mem = mService.logExecute(memId, password);
+					
+					if (mem != null && memId == 100) {
+						System.out.println("관리자 로그인 성공! \n 관리자모드를 실행합니다.");
 						admin.adminExecute();
 
-					} else {
-						mService.logExecute(memId, password);
-						System.out.println(memId + "님 환영합니다.");
+					} else if(mem != null && memId != 100) {
+						System.out.println("로그인 성공\n" + memId + "님 환영합니다.");
 						user.userExecute();
+						
+					} else if(mem == null) {
+						System.out.println("회원번호 또는 비밀번호를 확인하세요..");
 					}
 
 					break;
