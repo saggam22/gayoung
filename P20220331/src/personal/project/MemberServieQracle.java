@@ -55,12 +55,12 @@ public class MemberServieQracle extends DAO implements MemberService {
 	public List<Member> memberList() {
 		conn = getConn();
 		List<Member> list = new ArrayList<Member>();
-		Member mem = new Member();
+		Member mem = null;
 		try {
 			psmt = conn.prepareStatement("SELECT * FROM member");
 			rs = psmt.executeQuery();
-
 			while (rs.next()) {
+				mem = new Member();
 				mem.setMemberId(rs.getInt("member_id"));
 				mem.setPassword(rs.getInt("password"));
 				mem.setMemberName(rs.getString("member_name"));
@@ -79,12 +79,13 @@ public class MemberServieQracle extends DAO implements MemberService {
 	// 회원 번호 검색
 	public Member searchMember(int memId) {
 		conn = getConn();
-		Member mem = new Member();
+		Member mem = null;
 		try {
 			psmt = conn.prepareStatement("SELECT * FROM member WHERE member_id = ?");
 			psmt.setInt(1, memId);
 			rs = psmt.executeQuery();
 			if (rs.next()) {
+				mem = new Member();
 				mem.setMemberId(rs.getInt("member_id"));
 				mem.setPassword(rs.getInt("password"));
 				mem.setMemberName(rs.getString("member_name"));
@@ -102,13 +103,14 @@ public class MemberServieQracle extends DAO implements MemberService {
 	public List<Member> serchName(String memName) {
 		conn = getConn();
 		List<Member> list = new ArrayList<Member>();
-		Member mem = new Member();
+		Member mem = null;
 		try {
 			psmt = conn.prepareStatement("SELECT * FROM member WHERE member_name LIKE '%'||?||'%' ");
 			psmt.setString(1, memName);
 			rs = psmt.executeQuery();
 
 			while (rs.next()) {
+				mem = new Member();
 				mem.setMemberId(rs.getInt("member_id"));
 				mem.setPassword(rs.getInt("password"));
 				mem.setMemberName(rs.getString("member_name"));

@@ -58,4 +58,8 @@ public class Member {
 	public String toString() {
 		return "회원정보 [회원번호=" + memberId + ", 회원이름=" + memberName + ", 회원연락처=" + memberPhone + "]";
 	}
+	
+	public String toStringAdmin() {
+		return "회원정보 [회원번호=" + memberId + ", 비밀번호=" + password + ", 회원이름=" + memberName + ", 회원연락처=" + memberPhone + "]";
+	}
 }

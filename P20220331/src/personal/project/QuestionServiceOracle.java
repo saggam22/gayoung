@@ -1,6 +1,6 @@
 package personal.project;
 
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.*;
 
 public class QuestionServiceOracle extends DAO implements QuestionService {
@@ -27,11 +27,11 @@ public class QuestionServiceOracle extends DAO implements QuestionService {
 	public List<Question> qList() {
 		conn = getConn();
 		List<Question> qlist = new ArrayList<Question>();
-		Question q = new Question();
 		try {
 			psmt = conn.prepareStatement("SELECT * FROM question");
 			rs = psmt.executeQuery();
 			while (rs.next()) {
+				Question q = new Question();
 				q.setQuestionId(rs.getInt("question_id"));
 				q.setQuestionContents(rs.getString("question_contents"));
 				q.setAnswer(rs.getInt("answer"));
@@ -51,12 +51,13 @@ public class QuestionServiceOracle extends DAO implements QuestionService {
 	@Override
 	public Question searchQ(int qId) {
 		conn = getConn();
-		Question q = new Question();
+		Question q = null;
 		try {
 			psmt = conn.prepareStatement("SELECT * FROM question WHERE question_id = ?");
 			psmt.setInt(1, qId);
 			rs = psmt.executeQuery();
 			if (rs.next()) {
+				q = new Question();
 				q.setQuestionId(rs.getInt("question_id"));
 				q.setQuestionContents(rs.getString("question_contents"));
 				q.setAnswer(rs.getInt("answer"));
@@ -107,12 +108,15 @@ public class QuestionServiceOracle extends DAO implements QuestionService {
 	public List<Question> aList() {
 		conn = getConn();
 		List<Question> qlist = new ArrayList<Question>();
-		Question q = new Question();
+		Question q = null;
 		try {
-			psmt = conn.prepareStatement("SELECT question_contents FROM question ORDER BY question_id");
+			psmt = conn.prepareStatement("SELECT question_id, question_contents, answer FROM question ORDER BY question_id");
 			rs = psmt.executeQuery();
 			while(rs.next()) {
+				q = new Question();
+				q.setQuestionId(rs.getInt("question_id"));
 				q.setQuestionContents(rs.getString("question_contents"));
+				q.setAnswer(rs.getInt("answer"));
 				qlist.add(q);
 			}
 		} catch (SQLException e) {
@@ -121,27 +125,6 @@ public class QuestionServiceOracle extends DAO implements QuestionService {
 			disConn();
 		}
 		return qlist;
-	}
-	
-	@Override
-	public List<Question> qAnswer() {
-		conn = getConn();
-		List<Question> alist = new ArrayList<Question>();
-		Question q = new Question();
-		try {
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery("SELECT question_id, answer FROM question ORDER BY question_id");
-			while(rs.next()) {
-				q.setQuestionId(rs.getInt("question_id"));
-				q.setAnswer(rs.getInt("answer"));
-				alist.add(q);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			disConn();
-		}
-		return alist;
 	}
 
 }//end of class

@@ -59,7 +59,7 @@ public class AdminExe {
 					if (input2 == 1) {
 						List<Member> memlist = mService.memberList();
 						for (Member m : memlist) {
-							System.out.println(m.toString());
+							System.out.println(m.toStringAdmin());
 						}
 
 					} else if (input2 == 2) {
