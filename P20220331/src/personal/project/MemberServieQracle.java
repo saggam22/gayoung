@@ -57,7 +57,7 @@ public class MemberServieQracle extends DAO implements MemberService {
 		List<Member> list = new ArrayList<Member>();
 		Member mem = null;
 		try {
-			psmt = conn.prepareStatement("SELECT * FROM member");
+			psmt = conn.prepareStatement("SELECT * FROM member ORDER BY member_id");
 			rs = psmt.executeQuery();
 			while (rs.next()) {
 				mem = new Member();

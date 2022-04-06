@@ -28,7 +28,7 @@ public class QuestionServiceOracle extends DAO implements QuestionService {
 		conn = getConn();
 		List<Question> qlist = new ArrayList<Question>();
 		try {
-			psmt = conn.prepareStatement("SELECT * FROM question");
+			psmt = conn.prepareStatement("SELECT * FROM question ORDER BY question_id");
 			rs = psmt.executeQuery();
 			while (rs.next()) {
 				Question q = new Question();

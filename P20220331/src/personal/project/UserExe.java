@@ -14,16 +14,16 @@ public class UserExe {
 		int input;
 		while (true) {
 			try {
-				System.out.println("1.시험치기(채점O) 2.문제확인(채점X) 3.내정보수정");
+				System.out.println("1.시험치기(채점O) 2.문제확인(채점X) 3.내정보수정 4.탈퇴하기 9.로그아웃하기");
 				input = scn.nextInt();
-				if (input == 1) {
+				if (input == 1) { //5문제 중 3문제 랜덤으로 출력
 					List<Question> qlist = qService.aList(); //문제리스트 리턴 클래스타입
 					List<Integer> alist = new ArrayList<Integer>(); //답리스트 답을 넣어준다
 					List<Integer> mylist = new ArrayList<Integer>(); //입력하는 답 리스트
 					int jumsu = 0;
-
+					
 					Collections.shuffle(qlist);
-					qlist = qlist.subList(0, 2);
+					qlist = qlist.subList(0, 3);
 					for (Question q : qlist) {
 						System.out.println(q.toQeustion());
 						alist.add(q.getAnswer());
@@ -71,6 +71,18 @@ public class UserExe {
 					Member mem = new Member(memId, password, memName, memPhone);
 					mService.updateMember(mem);
 
+				} else if (input == 4) {
+					System.out.println("탈퇴할 회원번호를 입력하세요");
+					int memId = scn.nextInt();
+					if (mService.searchMember(memId) == null) {
+						System.out.println("회원번호를 확인하세요");
+					} else {
+						mService.deleteMember(memId);
+						System.out.println("정상적으로 탈퇴되었습니다.");
+					}
+				} else if (input == 9) {
+					System.out.println("로그아웃되었습니다.");
+					break;
 				} else {
 					System.out.println("메뉴 중에서 선택해주세요..");
 				}
@@ -80,5 +92,6 @@ public class UserExe {
 				scn.next();
 			}
 		}
+		System.out.println("end of UserExe");
 	} // end of AdminExecute
 }

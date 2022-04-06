@@ -14,7 +14,8 @@ public class youngNetApp {
 		int input;
 		while (true) {
 			try {
-				System.out.println("1.로그인 2.회원등록 9.프로그램종료");
+				System.out.println("========== youngNet ===========");
+				System.out.println("1.로그인 2.회원가입 9.프로그램종료");
 				input = scn.nextInt();
 				if (input == 1) {
 					System.out.println("회원번호를 입력하세요");
@@ -36,23 +37,22 @@ public class youngNetApp {
 						System.out.println("회원번호 또는 비밀번호를 확인하세요..");
 					}
 
-					// break;
-
 				} else if (input == 2) {
 					System.out.println("회원번호를 입력하세요");
 					int memId = scn.nextInt();
-					System.out.println("비밀번호를 입력하세요");
-					int password = scn.nextInt();
-					System.out.println("이름을 입력하세요");
-					String memName = scn.next();
-					System.out.println("핸드폰번호를 입력하세요");
-					String memPhone = scn.next();
+					if (mService.searchMember(memId) != null) {
+						System.out.println("이미 등록된 회원번호입니다.");
+					} else {
+						System.out.println("비밀번호를 입력하세요");
+						int password = scn.nextInt();
+						System.out.println("이름을 입력하세요");
+						String memName = scn.next();
+						System.out.println("핸드폰번호를 입력하세요");
+						String memPhone = scn.next();
 
-					Member mem = new Member(memId, password, memName, memPhone);
-					mService.insetMember(mem);
-
-					break;
-
+						Member mem = new Member(memId, password, memName, memPhone);
+						mService.insetMember(mem);
+					}
 				} else if (input == 9) {
 					System.out.println("프로그램을 종료합니다.");
 					break;
