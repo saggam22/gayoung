@@ -14,7 +14,8 @@ public class UserExe {
 		int input;
 		while (true) {
 			try {
-				System.out.println("1.시험치기(채점O) 2.문제확인(채점X) 3.내정보수정 4.탈퇴하기 9.로그아웃하기");
+				System.out.println("\n1.시험치기(채점O) 2.문제확인(채점X) 3.내정보수정 4.탈퇴하기 9.로그아웃하기");
+				System.out.println(">> ");
 				input = scn.nextInt();
 				if (input == 1) { //5문제 중 3문제 랜덤으로 출력
 					List<Question> qlist = qService.aList(); //문제리스트 리턴 클래스타입
@@ -31,27 +32,33 @@ public class UserExe {
 						int answer = scn.nextInt();
 						mylist.add(answer);
 					}
-					
+					System.out.println("=============<성적표>===============");
 					System.out.print("\n정답: ");
 					for (int a : alist) {
-						System.out.print(a);
+						System.out.print(" " + a);
 					}
 					System.out.print("\n답안: ");
 					for (int my : mylist) {
-						System.out.print(my);
+						System.out.print(" " + my);
 					}
 					System.out.print("\n정오: ");
 					
 					for(int i=0; i<alist.size(); i++) {
 						if (alist.get(i) == mylist.get(i)) {
-							System.out.print("O");
+							System.out.print(" O");
 							jumsu++;
 						} else {
-							System.out.print("X");
+							System.out.print(" X");
 						}	
 					}
-					System.out.println("\n" + "채점결과 점수 :" + jumsu);
-
+					if(jumsu*20 < 60) {
+						System.out.println("불합격입니다. 좀 더 공부하세요");
+					} else {
+						System.out.println("★★축하합니다! 합격입니다★★");
+					}
+					System.out.println("\n점수 : " + jumsu*20);
+					System.out.println("================================");
+					
 				} else if (input == 2) {
 					List<Question> qlist = qService.qList();
 					for (Question q : qlist) {

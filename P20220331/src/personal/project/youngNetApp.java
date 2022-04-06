@@ -14,8 +14,8 @@ public class youngNetApp {
 		int input;
 		while (true) {
 			try {
-				System.out.println("========== youngNet ===========");
-				System.out.println("1.로그인 2.회원가입 9.프로그램종료");
+				loginmain();
+				System.out.print(">> ");
 				input = scn.nextInt();
 				if (input == 1) {
 					System.out.println("회원번호를 입력하세요");
@@ -26,15 +26,20 @@ public class youngNetApp {
 					Member mem = mService.logExecute(memId, password);
 
 					if (mem != null && memId == 100) {
-						System.out.println("관리자 로그인 성공! \n관리자모드를 실행합니다.");
+						System.out.println("-----------------------------------------------");
+						System.out.println("\t 관리자 로그인 완료 관리자모드를 실행합니다.");
+						System.out.println("-----------------------------------------------");
 						admin.adminExecute();
 
 					} else if (mem != null && memId != 100) {
-						System.out.println("로그인 성공\n" + memId + "님 환영합니다.");
+						System.out.println("-----------------------------------------------");
+						System.out.println("\t 회원 로그인 완료" + memId + "를 환영합니다.");
+						System.out.println("-----------------------------------------------");
+
 						user.userExecute();
 
 					} else if (mem == null) {
-						System.out.println("회원번호 또는 비밀번호를 확인하세요..");
+						System.out.println("회원번호 또는 비밀번호를 확인하세요../n");
 					}
 
 				} else if (input == 2) {
@@ -57,14 +62,24 @@ public class youngNetApp {
 					System.out.println("프로그램을 종료합니다.");
 					break;
 				} else {
-					System.out.println("1 또는 2 중에서 선택해주세요..");
+					System.out.println("1 또는 2 중에서 선택해주세요..\n");
 				}
 			} catch (InputMismatchException e) {
-				System.out.println("번호를 입력해주세요..");
+				System.out.println("번호를 입력해주세요..\n");
 				scn.next();
 			}
 		}
 		System.out.println("end of prog");
 	} // end of execute
 
+	
+	public void loginmain() {
+		String str = "===============================================\n";
+		str += "              Welcome!! youngNet \n";
+		str += "===============================================\n";
+		str += "\t\t▶1.로그인\n"
+				+ "\t\t▶2.회원가입\n"
+				+ "\t\t▶9.종료하기\n";
+		System.out.println(str);
+	}
 }

@@ -13,10 +13,12 @@ public class AdminExe {
 
 		while (true) {
 			try {
-				System.out.println("1.문제관리 2.회원관리 9.로그아웃하기");
+				System.out.println("\n1.문제관리 2.회원관리 9.로그아웃하기");
+				System.out.println(">> ");
 				input = scn.nextInt();
 				if (input == 1) {
 					System.out.println("1.문제리스트 2.문제등록 3.문제수정 4.문제삭제");
+					System.out.println(">> ");
 					input2 = scn.nextInt();
 
 					if (input2 == 1) {
@@ -24,7 +26,6 @@ public class AdminExe {
 						for (Question q : qlist) {
 							System.out.println(q.toString());
 						}
-
 					} else if (input2 == 2) {
 						System.out.println("문제번호를 입력하세요");
 						int qId = scn.nextInt();
@@ -32,22 +33,28 @@ public class AdminExe {
 							System.out.println("이미 등록된 문제번호입니다.");
 						} else {
 							System.out.println("문제내용을 입력하세요");
-							String qContents = scn.next();
+							scn.nextLine();
+							String qContents = scn.nextLine();
+							System.out.println("문제보기를 입력하세요");
+							String qSelect = scn.nextLine();
 							System.out.println("정답을 입력하세요");
 							int answer = scn.nextInt();
 
-							Question q = new Question(qId, qContents, answer);
+							Question q = new Question(qId, qContents, qSelect, answer);
 							qService.insetQ(q);
 						}
 					} else if (input2 == 3) {
 						System.out.println("수정할 문제번호를 입력하세요");
 						int qId = scn.nextInt();
 						System.out.println("문제내용을 입력하세요");
-						String qContents = scn.next();
+						scn.nextLine();
+						String qContents = scn.nextLine();
+						System.out.println("문제보기를 입력하세요");
+						String qSelect = scn.nextLine();
 						System.out.println("정답을 입력하세요");
 						int answer = scn.nextInt();
 
-						Question q = new Question(qId, qContents, answer);
+						Question q = new Question(qId, qContents, qSelect, answer);
 						qService.updateQ(q);
 
 					} else if (input2 == 4) {
@@ -62,13 +69,18 @@ public class AdminExe {
 					}
 				} else if (input == 2) {
 					System.out.println("1.회원리스트 2.회원등록 3.회원정보수정 4.회원삭제 5.회원검색(회원번호) 6.회원검색(회원이름)");
+					System.out.println(">> ");
 					input2 = scn.nextInt();
 
 					if (input2 == 1) {
+						System.out.println("===========================================");
+						System.out.println("회원번호\t|비밀번호\t|회원이름\t|회원연락처");
+						System.out.println("-------------------------------------------");
 						List<Member> memlist = mService.memberList();
 						for (Member m : memlist) {
 							System.out.println(m.toStringAdmin());
 						}
+						System.out.println("===========================================");
 
 					} else if (input2 == 2) {
 						System.out.println("회원번호를 입력하세요");
@@ -126,9 +138,13 @@ public class AdminExe {
 						if (searchName.size() == 0) {
 							System.out.println("조회된 결과가 없습니다.");
 						} else {
+							System.out.println("===========================================");
+							System.out.println("회원번호\t|비밀번호\t|회원이름\t|회원연락처");
+							System.out.println("-------------------------------------------");
 							for (Member m : searchName) {
 								System.out.println(m.toString());
 							}
+							System.out.println("===========================================");
 							System.out.println("정상적으로 조회되었습니다.");
 						}
 					}

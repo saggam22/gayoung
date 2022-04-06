@@ -9,10 +9,11 @@ public class QuestionServiceOracle extends DAO implements QuestionService {
 	public void insetQ(Question q) {
 		conn = getConn();
 		try {
-			psmt = conn.prepareStatement("INSERT INTO question (question_id, question_contents, answer) VALUES (?, ?, ?)");
+			psmt = conn.prepareStatement("INSERT INTO question (question_id, question_contents, answer, question_select) VALUES (?, ?, ?, ?)");
 			psmt.setInt(1, q.getQuestionId());
 			psmt.setString(2, q.getQuestionContents());
 			psmt.setInt(3, q.getAnswer());
+			psmt.setString(4, q.getQuestionSelect());
 			
 			psmt.executeUpdate();
 			
@@ -35,6 +36,7 @@ public class QuestionServiceOracle extends DAO implements QuestionService {
 				q.setQuestionId(rs.getInt("question_id"));
 				q.setQuestionContents(rs.getString("question_contents"));
 				q.setAnswer(rs.getInt("answer"));
+				q.setQuestionSelect(rs.getString("question_select"));
 				
 				qlist.add(q);
 			}
@@ -61,6 +63,7 @@ public class QuestionServiceOracle extends DAO implements QuestionService {
 				q.setQuestionId(rs.getInt("question_id"));
 				q.setQuestionContents(rs.getString("question_contents"));
 				q.setAnswer(rs.getInt("answer"));
+				q.setQuestionSelect(rs.getString("question_select"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -74,10 +77,11 @@ public class QuestionServiceOracle extends DAO implements QuestionService {
 	public void updateQ(Question q) {
 		conn = getConn();
 		try {
-			psmt = conn.prepareStatement("UPDATE question SET question_contents = ?, answer = ? WHERE question_id = ?");
+			psmt = conn.prepareStatement("UPDATE question SET question_contents = ?, answer = ?, question_select = ? WHERE question_id = ?");
 			psmt.setString(1, q.getQuestionContents());
 			psmt.setInt(2, q.getAnswer());
-			psmt.setInt(3, q.getQuestionId());
+			psmt.setString(3, q.getQuestionSelect());
+			psmt.setInt(4, q.getQuestionId());
 			
 			psmt.executeUpdate();
 			
@@ -110,13 +114,14 @@ public class QuestionServiceOracle extends DAO implements QuestionService {
 		List<Question> qlist = new ArrayList<Question>();
 		Question q = null;
 		try {
-			psmt = conn.prepareStatement("SELECT question_id, question_contents, answer FROM question ORDER BY question_id");
+			psmt = conn.prepareStatement("SELECT * FROM question ORDER BY question_id");
 			rs = psmt.executeQuery();
 			while(rs.next()) {
 				q = new Question();
 				q.setQuestionId(rs.getInt("question_id"));
 				q.setQuestionContents(rs.getString("question_contents"));
 				q.setAnswer(rs.getInt("answer"));
+				q.setQuestionSelect(rs.getString("question_select"));
 				qlist.add(q);
 			}
 		} catch (SQLException e) {

@@ -4,16 +4,18 @@ public class Question {
 	
 	private int questionId;
 	private String questionContents;
+	private String questionSelect;
 	private int answer;
 	
 	
 	public Question() {
 	}
 	
-	public Question(int questionId, String questionContents, int answer) {
+	public Question(int questionId, String questionContents, String questionSelect, int answer) {
 		super();
 		this.questionId = questionId;
 		this.questionContents = questionContents;
+		this.questionSelect = questionSelect;
 		this.answer = answer;
 	}
 
@@ -32,6 +34,14 @@ public class Question {
 	public void setQuestionContents(String questionContents) {
 		this.questionContents = questionContents;
 	}
+	
+	public String getQuestionSelect() {
+		return questionSelect;
+	}
+
+	public void setQuestionSelect(String questionSelect) {
+		this.questionSelect = questionSelect;
+	}
 
 	public int getAnswer() {
 		return answer;
@@ -43,12 +53,25 @@ public class Question {
 
 	@Override
 	public String toString() {
-		return "문제리스트 [문제번호=" + questionId + ", 문제내용=" + questionContents + ", 정답=" + answer
-				+ "]";
+		
+		String str = "==========================================================\n" //
+				+ " 문제번호 " + questionId + "\t | \t 정답 " + answer  + "\n" 
+				+"----------------------------------------------------------\n"
+				+ questionContents
+				+ "\n"
+				+ questionSelect
+				+"\n==========================================================";
+
+		return str;
 	}
 	
 	public String toQeustion() {
-		return "[문제번호=" + questionId + ", 문제내용=" + questionContents + "]";
+		String str = "----------------------------------------------------------\n" //
+				+ questionId + ". " + questionContents  + "\n" 
+				+ "   " + questionSelect
+				+"\n----------------------------------------------------------";
+
+		return str;
 	}
 	
 	public int toAnswer() {

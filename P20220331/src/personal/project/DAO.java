@@ -12,7 +12,7 @@ public class DAO {
 	public Connection getConn() {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "hr", "hr");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "hr", "hr"); //localhost에 ip주소 적어도 된다
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
