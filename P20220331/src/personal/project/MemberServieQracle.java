@@ -158,4 +158,52 @@ public class MemberServieQracle extends DAO implements MemberService {
 			disConn();
 		}
 	}// end of deleteMember method
+	
+	@Override
+	public void insertExam(Exam exam) {
+		conn = getConn();
+		String sql = "INSERT INTO exam (exam_date, jumsu, result, member_id) VALUES (sysdate, ?, ?, ?)";
+
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, exam.getJumsu());
+			psmt.setString(2, exam.getResult());
+			psmt.setInt(3, exam.getMemberId());
+
+			psmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disConn();
+		}
+	}
+
+	@Override
+	public List<Exam> myExamList(Member mem) {
+		conn = getConn();
+		List<Exam> list = new ArrayList<Exam>();
+		Exam exam = null;
+		try {
+			psmt = conn.prepareStatement("SELECT * FROM exam WHERE user_id = ? ORDER BY exam_date");
+			psmt.setInt(1, mem.getMemberId());
+			rs = psmt.executeQuery();
+
+			while (rs.next()) {
+				exam = new Exam();
+				exam.setMemberId(rs.getInt("member_id"));
+				exam.setExamDate(rs.getString("exam_date"));
+				exam.setJumsu(rs.getInt("jumsu"));
+				exam.setResult(rs.getString("result"));
+
+				list.add(exam);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disConn();
+		}
+		return list;
+	}
+
 } // end of class

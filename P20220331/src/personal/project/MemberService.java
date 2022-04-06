@@ -11,5 +11,7 @@ public interface MemberService {
 		public List<Member> serchName(String memName); //회원이름검색
 		public void updateMember(Member mem); //회원정보수정
 		public void deleteMember(int memberId); //회원삭제
+		public void insertExam(Exam exam); //내 응시결과 저장
+		public List<Exam> myExamList(Member mem); //내 응시결과 리스트보기
 		
 }

@@ -35,8 +35,16 @@ public class AdminExe {
 							System.out.println("문제내용을 입력하세요");
 							scn.nextLine();
 							String qContents = scn.nextLine();
-							System.out.println("문제보기를 입력하세요");
-							String qSelect = scn.nextLine();
+							System.out.println("문제보기를 입력하세요(작성완료시 end 입력)");
+							String qSelect = "";
+							String select = "";
+							while (scn.hasNext()) {
+								if ((select = scn.nextLine()).equals("end")) {
+									break;
+								} else {
+									qSelect += (" " + select + "\r\n");
+								}
+							}
 							System.out.println("정답을 입력하세요");
 							int answer = scn.nextInt();
 
@@ -49,8 +57,12 @@ public class AdminExe {
 						System.out.println("문제내용을 입력하세요");
 						scn.nextLine();
 						String qContents = scn.nextLine();
-						System.out.println("문제보기를 입력하세요");
-						String qSelect = scn.nextLine();
+						System.out.println("문제보기를 입력하세요(작성완료시 end 입력)");
+						String qSelect = "";
+						String select = "";
+						do {
+							qSelect += ("   " + select + "\r\n");
+						} while((select = scn.nextLine()).equals("end"));
 						System.out.println("정답을 입력하세요");
 						int answer = scn.nextInt();
 

@@ -11,6 +11,10 @@ public class Member {
 		super();
 	}
 	
+	public Member(int memberId) {
+		this.memberId = memberId;
+	}
+	
 	public Member(int memberId, int password) {
 		super();
 		this.memberId = memberId;
