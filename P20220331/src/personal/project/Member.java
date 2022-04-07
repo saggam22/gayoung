@@ -21,6 +21,13 @@ public class Member {
 		this.password = password;
 	}
 	
+	public Member(int memberId, String memberName, String memberPhone) {
+		super();
+		this.memberId = memberId;
+		this.memberName = memberName;
+		this.memberPhone = memberPhone;
+	}
+	
 	public Member(int memberId, int password, String memberName, String memberPhone) {
 		super();
 		this.memberId = memberId;
@@ -60,10 +67,10 @@ public class Member {
 	
 	@Override
 	public String toString() {
-		return memberId + "\t|" + memberName  + "\t|" + memberPhone;
+		return memberId + "\t\t|" + memberName  + "\t\t|" + memberPhone;
 	}
 	
 	public String toStringAdmin() {
-		return memberId + "\t|" + password + "\t|" + memberName  + "\t|" + memberPhone;
+		return memberId + "\t\t|" + password + "\t\t|" + memberName  + "\t\t|" + memberPhone;
 	}
 }

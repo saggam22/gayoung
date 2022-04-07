@@ -1,9 +1,9 @@
 package personal.project;
 
-public class youngNetExe {
+public class YoungNetExe {
 	public static void main(String[] args) {
 		//실행부
-		youngNetApp gApp = new youngNetApp();
+		YoungNetApp gApp = new YoungNetApp();
 		gApp.execute();
 	}
 }

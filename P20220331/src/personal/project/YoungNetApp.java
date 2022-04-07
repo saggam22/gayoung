@@ -2,7 +2,7 @@ package personal.project;
 
 import java.util.*;
 
-public class youngNetApp {
+public class YoungNetApp {
 
 	Scanner scn = new Scanner(System.in);
 	MemberService mService = new MemberServieQracle();
@@ -19,27 +19,27 @@ public class youngNetApp {
 				input = scn.nextInt();
 				if (input == 1) {
 					System.out.println("회원번호를 입력하세요");
-					int memId = scn.nextInt();
+					int logId = scn.nextInt();
 					System.out.println("비밀번호를 입력하세요");
 					int password = scn.nextInt();
 
-					Member mem = mService.logExecute(memId, password);
+					Member mem = mService.logExecute(logId, password);
 
-					if (mem != null && memId == 100) {
-						System.out.println("-----------------------------------------------");
-						System.out.println("\t 관리자 로그인 완료 관리자모드를 실행합니다.");
-						System.out.println("-----------------------------------------------");
-						admin.adminExecute();
+					if (mem != null && logId == 100) {
+						System.out.println("-----------------------------------------------------");
+						System.out.println("\t관리자 로그인 완료 관리자모드를 실행합니다.");
+						System.out.println("-----------------------------------------------------");
+						admin.adminExecute(logId);
 
-					} else if (mem != null && memId != 100) {
-						System.out.println("-----------------------------------------------");
-						System.out.println("\t 회원 로그인 완료" + memId + "를 환영합니다.");
-						System.out.println("-----------------------------------------------");
+					} else if (mem != null && logId != 100) {
+						System.out.println("-----------------------------------------------------");
+						System.out.println("\t회원 로그인 완료" + logId + "를 환영합니다.");
+						System.out.println("-----------------------------------------------------");
 
-						user.userExecute();
+						user.userExecute(logId);
 
 					} else if (mem == null) {
-						System.out.println("회원번호 또는 비밀번호를 확인하세요../n");
+						System.out.println("회원번호 또는 비밀번호를 확인하세요\n");
 					}
 
 				} else if (input == 2) {
@@ -62,10 +62,10 @@ public class youngNetApp {
 					System.out.println("프로그램을 종료합니다.");
 					break;
 				} else {
-					System.out.println("1 또는 2 중에서 선택해주세요..\n");
+					System.out.println("메뉴 중에서 선택해주세요\n");
 				}
 			} catch (InputMismatchException e) {
-				System.out.println("번호를 입력해주세요..\n");
+				System.out.println("번호를 입력해주세요\n");
 				scn.next();
 			}
 		}
@@ -74,9 +74,9 @@ public class youngNetApp {
 
 	
 	public void loginmain() {
-		String str = "===============================================\n";
-		str += "              Welcome!! youngNet \n";
-		str += "===============================================\n";
+		String str = "\n=====================================================\n";
+		str += "                   Welcome!! youngNet \n";
+		str += "=====================================================\n";
 		str += "\t\t▶1.로그인\n"
 				+ "\t\t▶2.회원가입\n"
 				+ "\t\t▶9.종료하기\n";

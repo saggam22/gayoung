@@ -126,7 +126,7 @@ public class MemberServieQracle extends DAO implements MemberService {
 		return list;
 	}// end of serchName method
 
-	// 회원정보 수정
+	// 회원정보 수정(관리자용)
 	public void updateMember(Member mem) {
 		conn = getConn();
 		String sql = "UPDATE member SET password = ?, member_name = ?, member_phone = ? WHERE member_id = ? ";
@@ -144,6 +144,41 @@ public class MemberServieQracle extends DAO implements MemberService {
 			disConn();
 		}
 	}// end of updateMember method
+	
+	// 회원정보 수정(회원용 정보만 변경)
+		public void updateMyInfo(Member mem) {
+			conn = getConn();
+			String sql = "UPDATE member SET member_name = ?, member_phone = ? WHERE member_id = ? ";
+			try {
+				psmt = conn.prepareStatement(sql);
+				psmt.setString(2, mem.getMemberName());
+				psmt.setString(3, mem.getMemberPhone());
+				psmt.setInt(4, mem.getMemberId());
+				psmt.executeUpdate();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				disConn();
+			}
+		}
+		
+		// 회원정보 수정(회원용 비밀번호만 변경)
+		public void updateMyPs(Member mem) {
+			conn = getConn();
+			String sql = "UPDATE member SET password = ? WHERE member_id = ? ";
+			try {
+				psmt = conn.prepareStatement(sql);
+				psmt.setInt(1, mem.getPassword());
+				psmt.setInt(2, mem.getMemberId());
+				psmt.executeUpdate();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				disConn();
+			}
+		}
 
 	// 회원정보 삭제
 	public void deleteMember(int memberId) {
@@ -185,7 +220,7 @@ public class MemberServieQracle extends DAO implements MemberService {
 		List<Exam> list = new ArrayList<Exam>();
 		Exam exam = null;
 		try {
-			psmt = conn.prepareStatement("SELECT * FROM exam WHERE user_id = ? ORDER BY exam_date");
+			psmt = conn.prepareStatement("SELECT * FROM exam WHERE member_id = ? ORDER BY exam_date");
 			psmt.setInt(1, mem.getMemberId());
 			rs = psmt.executeQuery();
 

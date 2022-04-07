@@ -9,7 +9,9 @@ public interface MemberService {
 		public List<Member> memberList(); //회원전체리스트
 		public Member searchMember(int memId); //회원검색
 		public List<Member> serchName(String memName); //회원이름검색
-		public void updateMember(Member mem); //회원정보수정
+		public void updateMember(Member mem); //회원정보수정 - 관리자용
+		public void updateMyInfo(Member mem); //회원정보만 수정 - 회원용
+		public void updateMyPs(Member mem); //패스워드만 수정 - 회원용
 		public void deleteMember(int memberId); //회원삭제
 		public void insertExam(Exam exam); //내 응시결과 저장
 		public List<Exam> myExamList(Member mem); //내 응시결과 리스트보기
