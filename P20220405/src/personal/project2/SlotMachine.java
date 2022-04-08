@@ -18,9 +18,6 @@ public class SlotMachine {
 	
 	public static void UserExcute() {
 		
-		int money;
-		int buy;
-		
 		while (true) {
 		System.out.println("===============자판기==============");
 		System.out.println("1.음료수사기 2.로또사기 8.관리자용 9.프로그램 종료");
