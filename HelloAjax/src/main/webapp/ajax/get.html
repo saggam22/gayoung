@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ajax/get.html</title>
+</head>
+<body>
+	<div id="show">
+		<table border="1">
+			<thead>
+				<tr><th>학생번호</th><th>학생이름</th><th>영어점수</th><th>국어점수</th></tr>
+			</thead>
+			<tbody id="list"></tbody>
+		</table>
+	</div>
+	<script>
+		//서버에 파일을 요청하고 읽어들이도록
+		let xhtp = new XMLHttpRequest(); //new String(); 서버에 페이지를 요청하면 페이지를 보여줌
+		
+		//xhtp.open("get", "../index.html"); //호출타입(ger/post)과 요청할 페이지 지정
+		//xhtp.open("get", "myInfo.txt");
+		xhtp.open("get", "../studentList.json");
+		xhtp.send(); //호출시작
+		xhtp.onload = function() { //on$$ : 이벤트 속성, onload : 읽어올때 속성
+			let data = JSON.parse(xhtp.response); //json => [{},{},{}]
+			console.log(data); //자바스크립트 배열형식
+			data.forEach ((student) => {
+			document.getElementById('list').appendChild(makeTr(student));				
+			});
+			//console.log(xhtp.response);
+			//document.getElementById('show').innerHTML = xhtp.response;
+		};
+		
+		function makeTr(student) {
+			let tr = '';
+			tr = document.createElement('tr');
+				for(field in student) {
+					let td = document.createElement('td');
+					td.innerHTML = student[field];
+					tr.appendChild(td);
+				}
+			return tr;
+		}
+	</script>
+</body>
+</html>
