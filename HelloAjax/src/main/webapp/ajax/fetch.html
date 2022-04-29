@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src=ajax.js></script>
+<script src=ajax2.js></script>
+</head>
+<body>
+	<script>
+		//ajax => XMLHttpRequest: => fetch();
+		let xhtp = new XMLHttpRequest();
+		xhtp.open('get', '../studentList.json');
+		xhtp.send();
+		xhtp.onload = function() {
+			console.log('xmlhttprequest')
+			console.log(xhtp.responseText)
+		}
+		
+		fetch('../studentList.json')
+			.then(function(result) {
+				let val = result.json(); //pending(처리중) //stream -> json(). text()
+				console.log(val)
+				return val;
+			})
+			.then(function(result) {
+				console.log(result)
+			})
+			.catch(function(error) {
+				console.log(error)
+			})
+	</script>
+</body>
+</html>

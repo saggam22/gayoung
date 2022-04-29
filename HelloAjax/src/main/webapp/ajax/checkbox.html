@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ajax/fetch.html</title>
+</head>
+<body>
+	<button id="selAll">전체 선택</button>
+	<button id="allChk">선택 삭제</button>
+	<table border="1">
+		<tr>
+			<td><input type="checkbox"></td>
+			<td>홍길동1</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox"></td>
+			<td>홍길동2</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox"></td>
+			<td>홍길동3</td>
+		</tr>
+	</table>
+	<script>
+		let btn = document.getElementById('allChk');
+		
+		btn.addEventListener('click', function() {
+		let allTr = document.querySelectorAll('tr');
+			allTr.forEach(function (tr) {
+				if(tr.firstElementChild.firstElementChild.checked == true) {
+					tr.remove();
+				}
+			});		
+		});
+		
+		let select = document.getElementById('selAll');
+		
+		select.addEventListener('click', function() {
+			let allTr = document.querySelectorAll('tr');
+			allTr.forEach(function (tr) {
+				tr.firstElementChild.firstElementChild.checked = true;
+			});
+		});
+	</script>
+</body>
+</html>
