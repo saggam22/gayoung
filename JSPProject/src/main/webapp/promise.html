@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>promise.html</title>
+</head>
+
+<body>
+  <script>
+    //ajax => XMLHttpRequest();
+    //중첩코드 => 1-> 2-> 3 :
+    //callBack1(
+    //  callback2(
+    //    callback3();
+    //   );
+    // ); 으로 중첩하여 사용해야하므로 
+
+    let val1 = 4;
+    setTimeout(function () {
+      if (val1 > 0) {
+        val1 -= 2;
+        console.log(val);
+      } else
+        console.log('error');
+      setTimeout(function () {
+        if (val1 > 0) {
+          val1 -= 2;
+          console.log(val);
+        } else
+          console.log('error');
+        setTimeout(function () {
+          if (val1 > 0) {
+            val1 -= 2;
+            console.log(val1);
+          } else
+            console.log('val1 error');
+        }, 3000);
+      }, 2000);
+    }, 1000); //알아보기가 어렵다
+
+    //promise객체를 사용하면 순서대로 실행이 되고, 코드를 보기도 쉽다
+    let val = 4;
+    let prom = new Promise(function (resolve, reject) {
+      setTimeout(function () {
+        if (val > 0) {
+          resolve('success');
+          val -= 2;
+        } else
+          reject('error');
+      }, 2000); //2초 후 실행
+    });
+    prom
+      .then(function (result) {
+        console.log(result);
+        return new Promise(function (resolve, reject) {
+          setTimeout(function () {
+            if (val > 0) {
+              resolve('success');
+              val -= 2;
+            } else
+              reject('error');
+          }, 2000); //2초 후 실행
+        });
+      })
+      .then(function (result) {
+        console.log(result);
+        return new Promise(function (resolve, reject) {
+          setTimeout(function () {
+            if (val > 0) {
+              resolve('success');
+              val -= 2;
+            } else
+              reject('error');
+          }, 2000); //2초 후 실행
+        });
+      })
+      .catch(function (reject) {
+        console.log(reject);
+      });
+  </script>
+</body>
+
+</html>
