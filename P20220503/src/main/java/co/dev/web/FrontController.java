@@ -20,6 +20,8 @@ public class FrontController extends HttpServlet {
 		list = new HashMap<String, Control>();
 		list.put("/memberInsert.do", new MemberInsertControl());
 		list.put("/memberUpdate.do", new MemberUpdateControl());
+		list.put("/memberSearch.do", new MemberSearchControl());
+		list.put("/memberDelete.do", new MemberDeleteControl());
 		list.put("/memberList.do", new MemberListControl());
 	}
 	
@@ -34,7 +36,6 @@ public class FrontController extends HttpServlet {
 		//request.getRequestURL() 함수는 전체 경로 http:// ~~
 		//request.ServletPath() 함수는 memberInsert.do 또는 Update.do의 값을 가져옴(파일명)
 		String path = url.substring(context.length()); //url에서 프로젝트의 길이부터 잘라냈으므로 memberInsert.do 또는 Update.do의 값을 가져옴(파일명)
-		
 		Control exeCon = list.get(path);
 		exeCon.execute(req, resp);
 	}
