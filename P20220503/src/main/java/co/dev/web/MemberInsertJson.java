@@ -71,8 +71,6 @@ public class MemberInsertJson implements Control {
 			MemberService service = new MemberService();
 			service.memberInsert(vo);
 			
-			response.getWriter().print("{\"msg\":\"처리완료\"}");
-			
 		}
 		
 		//json 형태의 결과 반환

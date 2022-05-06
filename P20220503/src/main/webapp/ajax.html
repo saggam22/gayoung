@@ -52,8 +52,8 @@
 				 e.preventDefault();
 				
 				let formData = new FormData(frm); //form 태그 요소를 multipart요청으로 처리
-				for(let keyVal of formData.entries()) { //['key' 'value'] 형식으로 나타냄
-					console.log(keyVal[0] + ", " + keyVal[1]); //[], []
+				for(let keyVal of formData.entries()) { //['key','value'] 형식으로 나타냄
+					console.log(keyVal + "," + keyVal[0] + ", " + keyVal[1]); //[], []
 				}
 				
 				//url, 요청방식{}
@@ -63,7 +63,7 @@
 							//body: formData //멀티파트일때는 그냥 넘김
 							body: formDataToEncoding(formData)
 						})
-						.then(data => data.text()) //멀티파트일때는 json으로
+						.then(data => data.json())
 						.then(result => {
 							console.log(result);
 							document.getElementById('list').append(makeTr(result));
