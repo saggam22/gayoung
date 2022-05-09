@@ -1,4 +1,4 @@
-package co.edu.full;
+package co.edu.todo;
 
 import java.io.IOException;
 import java.util.List;
@@ -13,13 +13,12 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 
-@WebServlet("/FullCalendarServlet")
-public class FullCalendarServlet extends HttpServlet {
+@WebServlet("/MyToDoListServlet")
+public class MyToDoListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 
-    public FullCalendarServlet() {
-        super();
+    public MyToDoListServlet() {
     }
 
 
@@ -28,8 +27,8 @@ public class FullCalendarServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/json;charset=utf-8");
 		
-		FullDAO dao = new FullDAO();
-		List<FullVO> list = dao.getList();
+		ToDoDAO dao = new ToDoDAO();
+		List<ToDoVO> list = dao.getList();
 		
 		Gson gson = new GsonBuilder().create();
 		response.getWriter().print(gson.toJson(list)); //json 타입 생성
@@ -41,18 +40,16 @@ public class FullCalendarServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		String job = request.getParameter("job");
-		FullDAO dao = new FullDAO();
+		ToDoDAO dao = new ToDoDAO();
 		if (job.equals("insert")) {
-			String title = request.getParameter("title");
-			String start = request.getParameter("start");
-			String end = request.getParameter("end");
+			String todo = request.getParameter("todo");
 			
-			FullVO vo = new FullVO(title, start, end);
+			ToDoVO vo = new ToDoVO(todo);
 			dao.insertSchedule(vo);
 			
 		} else if (job.equals("delete")) {
-			String title = request.getParameter("title");
-			dao.deleteSchedule(title);
+			String todo = request.getParameter("todo");
+			dao.deleteSchedule(todo);
 		}
 	}
 
