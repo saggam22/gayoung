@@ -22,7 +22,7 @@ public class ToDoDAO {
 			psmt = conn.prepareStatement(sql); // prepare객체를 만들기 위함
 			rs = psmt.executeQuery();
 			while (rs.next()) {
-				ToDoVO vo = new ToDoVO(rs.getString("todo"));
+				ToDoVO vo = new ToDoVO(rs.getString("todo"), rs.getString("status"));
 				list.add(vo);
 			}
 		} catch (SQLException e) {

@@ -150,18 +150,18 @@ fetch('./MyToDoListServlet')
 		.then(json => {
 			console.log(json);
 			json.forEach (list => {
-						let obj = {todo: list.todo};
+						let obj = {todo: list.todo, status: list.status};
 						loadData.push(obj);
 					});
 			})
 		.then(result2 => {
 				loadData.forEach(obj => {
 				var li = document.createElement('li')
-				for (field in obj) {
-					console.log(obj[field])
-					li.innerHTML = obj[field];
+				li.innerHTML = obj.todo;
+				ul.appendChild(li)
+				if (obj.status=='checked') {
+					li.setAttribute('class', 'checked')
 				}
-			ul.appendChild(li)
 			})})
 		.then(result3 => {
 			for (i = 0; i < myNodelist.length; i++) {
@@ -191,7 +191,13 @@ for (i = 0; i < close.length; i++) {
 var list = document.querySelector('ul');
 list.addEventListener('click', function(ev) {
   if (ev.target.tagName === 'LI') {
-    ev.target.classList.toggle('checked');
+	  ev.target.classList.toggle('checked');
+	  fetch('./MyToDoListServlet', {
+	  		method: 'post',
+	      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+	      body: `job=update&todo=${ev.target.childNodes[0].textContent}&status=${ev.target.classList.value}`
+	  		})
+	  		.catch(error => console.log(error));
   }
 }, false);
 
