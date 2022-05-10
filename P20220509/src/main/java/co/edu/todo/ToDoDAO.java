@@ -17,7 +17,7 @@ public class ToDoDAO {
 	public List<ToDoVO> getList() {
 		String sql = "select * from mytodolist";
 		getConnect();
-		List<ToDoVO> list = new ArrayList();
+		List<ToDoVO> list = new ArrayList<ToDoVO>();
 		try {
 			psmt = conn.prepareStatement(sql); // prepare객체를 만들기 위함
 			rs = psmt.executeQuery();

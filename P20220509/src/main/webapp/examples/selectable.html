@@ -9,7 +9,7 @@
   document.addEventListener('DOMContentLoaded', function() {
   	
   	let loadData = []; //변수선언 [{},{}]
-		fetch('/FullCalendarServlet')
+		fetch('../FullCalendarServlet')
 				.then(result => result.json())
 				.then(json => {
 					console.log(json);
