@@ -47,6 +47,12 @@ public class MyToDoListServlet extends HttpServlet {
 			ToDoVO vo = new ToDoVO(todo);
 			dao.insertSchedule(vo);
 			
+		} else if (job.equals("update")) {
+			String todo = request.getParameter("todo");
+			String status = request.getParameter("status");
+			ToDoVO vo = new ToDoVO(todo, status);
+			dao.updateSchedule(vo);
+			
 		} else if (job.equals("delete")) {
 			String todo = request.getParameter("todo");
 			dao.deleteSchedule(todo);

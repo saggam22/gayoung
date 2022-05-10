@@ -2,7 +2,6 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <style>
 body {
   margin: 0;
@@ -135,45 +134,25 @@ input {
 </div>
 
 <ul id="myUL">
-	
+  <li>Hit the gym</li>
+  <li class="checked">Pay bills</li>
+  <li>Meet George</li>
+  <li>Buy eggs</li>
+  <li>Read a book</li>
+  <li>Organize office</li>
 </ul>
 
 <script>
-			
 // Create a "close" button and append it to each list item
 var myNodelist = document.getElementsByTagName("LI");
 var i;
-let loadData = [];
-var ul = document.getElementById('myUL')
-fetch('./MyToDoListServlet')
-		.then(result => result.json())
-		.then(json => {
-			console.log(json);
-			json.forEach (list => {
-						let obj = {todo: list.todo};
-						loadData.push(obj);
-					});
-			})
-		.then(result2 => {
-				loadData.forEach(obj => {
-				var li = document.createElement('li')
-				for (field in obj) {
-					console.log(obj[field])
-					li.innerHTML = obj[field];
-				}
-			ul.appendChild(li)
-			})})
-		.then(result3 => {
-			for (i = 0; i < myNodelist.length; i++) {
-				  var span = document.createElement("SPAN");
-				  var txt = document.createTextNode("\u00D7");
-				  span.className = "close";
-				  span.appendChild(txt);
-				  myNodelist[i].appendChild(span);
-				}			
-		})
-		.catch(error => console.log(error));
-
+for (i = 0; i < myNodelist.length; i++) {
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  myNodelist[i].appendChild(span);
+}
 
 // Click on a close button to hide the current list item
 var close = document.getElementsByClassName("close");
@@ -185,7 +164,6 @@ for (i = 0; i < close.length; i++) {
     div.style.display = "none";
   }
 }
-
 
 // Add a "checked" symbol when clicking on a list item
 var list = document.querySelector('ul');
@@ -204,15 +182,7 @@ function newElement() {
   if (inputValue === '') {
     alert("You must write something!");
   } else {
-  	fetch('./MyToDoListServlet', {
-  		method: 'post',
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-      body: `job=insert&todo=${inputValue}`
-  		})
-  		.then(result => {
-    	document.getElementById("myUL").appendChild(li);
-  		})
-  		.catch(error => console.log(error));
+    document.getElementById("myUL").appendChild(li);
   }
   document.getElementById("myInput").value = "";
 

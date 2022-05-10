@@ -35,7 +35,7 @@ public class ToDoDAO {
 
 	//한건입력
 	public void insertSchedule (ToDoVO vo) {
-		String sql = " insert into mytodolist values(?)";
+		String sql = " insert into mytodolist(todo) values(?)";
 		
 		getConnect();
 		try {
@@ -50,6 +50,25 @@ public class ToDoDAO {
 		}
 		
 	}
+	
+	//수정
+		public void updateSchedule (ToDoVO vo) {
+			String sql = " update mytodolist set status=? where todo=?";
+			
+			getConnect();
+			try {
+				psmt = conn.prepareStatement(sql);
+				psmt.setString(1, vo.getStatus());
+				psmt.setString(2, vo.getTodo());
+				int r = psmt.executeUpdate();
+				System.out.println(r + "건 수정");
+			} catch (SQLException e) {	
+				e.printStackTrace();
+			} finally {
+				disConnect();
+			}
+			
+		}
 	
 	//한건삭제
 	public void deleteSchedule (String todo) {
