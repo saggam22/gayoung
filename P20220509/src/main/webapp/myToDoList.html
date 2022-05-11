@@ -170,7 +170,18 @@ fetch('./MyToDoListServlet')
 				  span.className = "close";
 				  span.appendChild(txt);
 				  myNodelist[i].appendChild(span);
-				}			
+				}		
+		})
+		.then(result4 => {
+			var close = document.getElementsByClassName("close");
+			var i;
+			for (i = 0; i < close.length; i++) {
+  			close[i].onclick = function() {
+	  		console.log(this)
+    		var div = this.parentElement;
+    		div.style.display = "none";
+  		}
+		}		
 		})
 		.catch(error => console.log(error));
 
